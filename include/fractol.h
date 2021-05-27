@@ -7,26 +7,27 @@
 # include <stdlib.h> // malloc, free, exit
 # include <math.h>
 # include <mlx.h>
-#include <stdbool.h> // boolean
+# include <stdbool.h> // boolean
 
-#define HEIGHT 600
-#define WIDTH 800
+# define HEIGHT 600
+# define WIDTH 800
 
-typedef struct	s_img {
-    void        *img;
-    char        *data;
-    int         bpp;
-    int         size_l;
-    int         endian;
-}               t_img;
-
-typedef struct	s_info
+typedef struct s_img
 {
-	void *mlx;
-	void *win;
-	t_img	img;
-}				t_info;
+	void	*img;
+	char	*data;
+	int		bpp;
+	int		size_l;
+	int		endian;
+}t_img;
 
-void draw_mandelbrot(t_info *info);
+typedef struct s_info
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
+}t_info;
+
+void	draw_mandelbrot(t_info *info);
 
 #endif
