@@ -7,6 +7,7 @@
 # include <stdlib.h> // malloc, free, exit
 # include <math.h>
 # include <mlx.h>
+#include <stdbool.h> // boolean
 
 #define HEIGHT 600
 #define WIDTH 800
