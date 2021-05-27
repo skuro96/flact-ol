@@ -27,4 +27,6 @@ typedef struct	s_info
 	t_img	img;
 }				t_info;
 
+void draw_mandelbrot(t_info *info);
+
 #endif
