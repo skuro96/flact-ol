@@ -72,7 +72,7 @@ void	draw_mandelbrot(t_info *info)
 			if (n == -1)
 				draw_pixel(info, j, i, 0x000000);
 			else
-				draw_pixel(info, j, i, n * pow(16, 3));
+				draw_pixel(info, j, i, n * pow(16, 3) + 0x4000a0);
 			j++;
 		}
 		i++;
