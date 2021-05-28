@@ -24,20 +24,6 @@ void	move(t_info *info, int keycode, double len)
 	}
 }
 
-int	key_hook(int keycode, t_info *info)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(info->mlx, info->win);
-		exit(0);
-	}
-	else if (123 <= keycode && keycode <= 126)
-		move(info, keycode, 0.05);
-	else
-		printf("keycode = %d\n", keycode);
-	return (1);
-}
-
 void	zoom(t_info *info, double zoom)
 {
 	t_vars	*v;
@@ -57,6 +43,20 @@ void	zoom(t_info *info, double zoom)
 	v->ey = center_y + dy / 2;
 }
 
+int	key_hook(int keycode, t_info *info)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(info->mlx, info->win);
+		exit(0);
+	}
+	else if (123 <= keycode && keycode <= 126)
+		move(info, keycode, (info->vars.ex - info->vars.sx) / 10);
+	else
+		printf("keycode=%d (keyboard)\n", keycode);
+	return (1);
+}
+
 int	mouse_hook(int keycode, int x, int y, t_info *info)
 {
 	(void)x;
@@ -65,5 +65,7 @@ int	mouse_hook(int keycode, int x, int y, t_info *info)
 		zoom(info, 1.1);
 	else if (keycode == 5)
 		zoom(info, 0.9);
+	else
+		printf("keycode=%d (mouse)\n", keycode);
 	return (0);
 }
