@@ -40,7 +40,7 @@ int	mandelbrot_n(double x, double y)
 	a = 0;
 	b = 0;
 	k = 0;
-	while (k < 20)
+	while (k < 50)
 	{
 		tmp_a = a * a - b * b + x;
 		b = 2 * a * b + y;
@@ -63,11 +63,11 @@ void	draw_mandelbrot(t_info *info)
 	i = 0;
 	while (i < HEIGHT)
 	{
-		y = i * 3.0 / HEIGHT - 1.5;
+		y = info->vars.sy + (info->vars.ey - info->vars.sy) * i / HEIGHT;
 		j = 0;
 		while (j < WIDTH)
 		{
-			x = j * 4.0 / WIDTH - 2.5;
+			x = info->vars.sx + (info->vars.ex - info->vars.sx) * j / WIDTH;
 			n = mandelbrot_n(x, y);
 			if (n == -1)
 				draw_pixel(info, j, i, 0x000000);
