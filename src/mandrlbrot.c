@@ -23,14 +23,14 @@ bool	is_mandelbrot(double x, double y)
 		tmp_a = a * a - b * b + x;
 		b = 2 * a * b + y;
 		a = tmp_a;
-		if (a * a + b * b > 4.0)
+		if (a * a + b * b > 16.0)
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
-int	mandelbrot_n(double x, double y)
+int	mandelbrot_n(double x, double y, int n)
 {
 	double	a;
 	double	b;
@@ -40,7 +40,7 @@ int	mandelbrot_n(double x, double y)
 	a = 0;
 	b = 0;
 	k = 0;
-	while (k < 50)
+	while (k < n)
 	{
 		tmp_a = a * a - b * b + x;
 		b = 2 * a * b + y;
@@ -50,6 +50,18 @@ int	mandelbrot_n(double x, double y)
 		k++;
 	}
 	return (-1);
+}
+
+int	iterate_n(t_vars vars)
+{
+	double	w;
+	int		n;
+
+	w = vars.ex - vars.sx;
+	n = 0;
+	while (w < 1.0 / pow(2, n))
+		n++;
+	return (n + 50);
 }
 
 void	draw_mandelbrot(t_info *info)
@@ -68,7 +80,7 @@ void	draw_mandelbrot(t_info *info)
 		while (j < WIDTH)
 		{
 			x = info->vars.sx + (info->vars.ex - info->vars.sx) * j / WIDTH;
-			n = mandelbrot_n(x, y);
+			n = mandelbrot_n(x, y, iterate_n(info->vars));
 			if (n == -1)
 				draw_pixel(info, j, i, 0x000000);
 			else
