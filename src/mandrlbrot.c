@@ -8,28 +8,6 @@ void	draw_pixel(t_info *info, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-bool	is_mandelbrot(double x, double y)
-{
-	double	a;
-	double	b;
-	double	tmp_a;
-	int		i;
-
-	a = 0;
-	b = 0;
-	i = 0;
-	while (i < 20)
-	{
-		tmp_a = a * a - b * b + x;
-		b = 2 * a * b + y;
-		a = tmp_a;
-		if (a * a + b * b > 16.0)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 int	mandelbrot_n(double x, double y, int n)
 {
 	double	a;
@@ -59,9 +37,9 @@ int	iterate_n(t_vars vars)
 
 	w = vars.ex - vars.sx;
 	n = 0;
-	while (w < 1.0 / pow(2, n))
+	while (1.0 / pow(2, n) > w)
 		n++;
-	return (n + 50);
+	return (n * 10 + 50);
 }
 
 void	draw_mandelbrot(t_info *info)
@@ -89,4 +67,5 @@ void	draw_mandelbrot(t_info *info)
 		}
 		i++;
 	}
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }

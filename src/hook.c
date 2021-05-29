@@ -54,6 +54,7 @@ int	key_hook(int keycode, t_info *info)
 		move(info, keycode, (info->vars.ex - info->vars.sx) / 10);
 	else
 		printf("keycode=%d (keyboard)\n", keycode);
+	draw_mandelbrot(info);
 	return (1);
 }
 
@@ -67,5 +68,6 @@ int	mouse_hook(int keycode, int x, int y, t_info *info)
 		zoom(info, 0.9);
 	else
 		printf("keycode=%d (mouse)\n", keycode);
+	draw_mandelbrot(info);
 	return (0);
 }
